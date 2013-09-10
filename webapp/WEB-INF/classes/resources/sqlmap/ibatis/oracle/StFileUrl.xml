@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="StFileUrl">
+	<typeAlias type="com.zc.system.fileCourse.pojo.StFileUrl" alias="stFileUrl"/>
+	<!--select,update,insert,delete. id名用于访问该资源，resultClass表示输出类型，parameterClass表示输入参数-->
+
+	
+	<!-- 列出一组记录，分页用 -->
+	<select id="findStFileUrlForPage" parameterClass="stFileUrl" resultClass="stFileUrl">
+		<![CDATA[
+	      SELECT	
+			      *
+		  FROM    
+		   (
+				SELECT A.*, ROWNUM RN 
+				FROM (
+				 SELECT	
+				      ID AS id,
+				      COURSE_NAME AS course_name,
+				      FILE_URL AS file_url,
+				      REMARK AS remark,
+				      CREATE_USER AS create_user,
+				      CREATE_DATE AS create_date,
+				      UPDATE_USER AS update_user,
+					  UPDATE_DATE AS update_date
+		  FROM    ST_FILE_URL  
+		  ]]>
+				   <dynamic prepend="WHERE">
+						<isNotEmpty prepend="AND" property="id"> ID = #id# </isNotEmpty>
+						<isNotEmpty prepend="AND" property="course_name"> COURSE_NAME = #course_name# </isNotEmpty>
+						<isNotEmpty prepend="AND" property="file_url"> FILE_URL = #file_url# </isNotEmpty>
+						<isNotEmpty prepend="AND" property="remark"> REMARK = #remark# </isNotEmpty>
+						<isNotEmpty prepend="AND" property="create_user"> CREATE_USER = #create_user# </isNotEmpty>
+						<isNotEmpty prepend="AND" property="create_date"> CREATE_DATE = #create_date# </isNotEmpty>
+						<isNotEmpty prepend="AND" property="update_user"> UPDATE_USER = #update_user# </isNotEmpty>
+						<isNotEmpty prepend="AND" property="update_date"> UPDATE_DATE = #update_date# </isNotEmpty>
+					</dynamic> 	
+		 <![CDATA[
+				  ) A 
+				WHERE ROWNUM <= #endRow#
+			) 
+			WHERE RN >= #startRow#
+	     ]]>
+		
+	</select>
+	<!-- 查询数量 -->
+	<select id="findStFileUrlCount" parameterClass="stFileUrl" resultClass="long">
+		<![CDATA[
+	       SELECT	
+			COUNT(ID)			                          			   	     		        
+	        FROM     ST_FILE_URL    
+		]]>
+		<dynamic prepend="WHERE">
+			<isNotEmpty prepend="AND" property="id"> ID = #id# </isNotEmpty>
+			<isNotEmpty prepend="AND" property="course_name"> COURSE_NAME = #course_name# </isNotEmpty>
+			<isNotEmpty prepend="AND" property="file_url"> FILE_URL = #file_url# </isNotEmpty>
+			<isNotEmpty prepend="AND" property="remark"> REMARK = #remark# </isNotEmpty>
+			<isNotEmpty prepend="AND" property="create_user"> CREATE_USER = #create_user# </isNotEmpty>
+			<isNotEmpty prepend="AND" property="create_date"> CREATE_DATE = #create_date# </isNotEmpty>
+			<isNotEmpty prepend="AND" property="update_user"> UPDATE_USER = #update_user# </isNotEmpty>
+			<isNotEmpty prepend="AND" property="update_date"> UPDATE_DATE = #update_date# </isNotEmpty>
+		</dynamic> 	
+	</select>
+	<!-- 列出一组记录，不分页用 -->
+	<select id="findStFileUrlList" parameterClass="stFileUrl" resultClass="stFileUrl">
+		<![CDATA[
+	      SELECT	
+			      ID AS id,
+			      COURSE_NAME AS course_name,
+			      FILE_URL AS file_url,
+			      REMARK AS remark,
+			      CREATE_USER AS create_user,
+			      CREATE_DATE AS create_date,
+			      UPDATE_USER AS update_user,
+				  UPDATE_DATE AS update_date
+		  FROM    ST_FILE_URL  
+	     ]]>
+		<dynamic prepend="WHERE">
+			<isNotEmpty prepend="AND" property="id"> ID = #id# </isNotEmpty>
+			<isNotEmpty prepend="AND" property="course_name"> COURSE_NAME = #course_name# </isNotEmpty>
+			<isNotEmpty prepend="AND" property="file_url"> FILE_URL = #file_url# </isNotEmpty>
+			<isNotEmpty prepend="AND" property="remark"> REMARK = #remark# </isNotEmpty>
+			<isNotEmpty prepend="AND" property="create_user"> CREATE_USER = #create_user# </isNotEmpty>
+			<isNotEmpty prepend="AND" property="create_date"> CREATE_DATE = #create_date# </isNotEmpty>
+			<isNotEmpty prepend="AND" property="update_user"> UPDATE_USER = #update_user# </isNotEmpty>
+			<isNotEmpty prepend="AND" property="update_date"> UPDATE_DATE = #update_date# </isNotEmpty>
+		</dynamic> 	
+	</select>
+	<!-- 增加一条记录 -->
+	<insert id="addStFileUrl" parameterClass="stFileUrl">
+		INSERT INTO st_file_url
+		<dynamic prepend="(" >
+			<isNotEmpty prepend="," property="id" > ID </isNotEmpty>
+			<isNotEmpty prepend="," property="course_name" > course_name </isNotEmpty>
+			<isNotEmpty prepend="," property="file_url" > file_url </isNotEmpty>
+			<isNotEmpty prepend="," property="remark" > remark </isNotEmpty>
+			<isNotEmpty prepend="," property="create_user" > create_user </isNotEmpty>
+			<isNotEmpty prepend="," property="id" > create_date </isNotEmpty>
+		      )
+		</dynamic>
+		VALUES 
+		<dynamic prepend="(" >
+			<isNotEmpty prepend="," property="id" > #id# </isNotEmpty>
+			<isNotEmpty prepend="," property="course_name" > #course_name# </isNotEmpty>
+			<isNotEmpty prepend="," property="file_url" > #file_url# </isNotEmpty>
+			<isNotEmpty prepend="," property="remark" > #remark# </isNotEmpty>
+			<isNotEmpty prepend="," property="create_user" > #create_user# </isNotEmpty>
+			<isNotEmpty prepend="," property="id" > sysdate </isNotEmpty>
+		)
+		</dynamic>
+		<!-- 
+		<selectKey resultClass="long" keyProperty="id" >  
+        	SELECT @@IDENTITY AS id   
+		</selectKey>
+		 -->
+	</insert>
+	<!-- 单条记录 -->
+	<select id="findStFileUrl" parameterClass="stFileUrl" resultClass="stFileUrl">
+		<![CDATA[
+				 SELECT	
+				      ID AS id,
+				      COURSE_NAME AS course_name,
+				      FILE_URL AS file_url,
+				      REMARK AS remark,
+				      CREATE_USER AS create_user,
+				      CREATE_DATE AS create_date,
+				      UPDATE_USER AS update_user,
+					  UPDATE_DATE AS update_date
+		  FROM    ST_FILE_URL  
+		  ]]>
+				   <dynamic prepend="WHERE">
+						<isNotEmpty prepend="AND" property="id"> ID = #id# </isNotEmpty>
+					</dynamic> 	
+	</select>
+	<!-- 删除一条记录 -->
+	<delete id="delCoures" parameterClass="stFileUrl">
+		<![CDATA[
+			DELETE  FROM   ST_FILE_URL            
+		 ]]>
+		 <dynamic prepend="WHERE">
+			<isNotEmpty prepend="AND" property="id"> ID = #id# </isNotEmpty>
+		</dynamic>
+	</delete>
+</sqlMap>

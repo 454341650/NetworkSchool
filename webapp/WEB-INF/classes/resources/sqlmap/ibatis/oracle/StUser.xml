@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="StUser">
+	<typeAlias type="com.zc.system.user.pojo.StUser" alias="stUser"/>
+	<typeAlias type="com.zc.common.UserToken" alias="userToken"/>
+	<!--select,update,insert,delete. id名用于访问该资源，resultClass表示输出类型，parameterClass表示输入参数-->
+
+	<!-- 用户登录 -->
+	<select id="login" parameterClass="userToken" resultClass="stUser">     
+       <![CDATA[
+       			select  name	      	as   name,
+       			        pwd           	as   pwd,
+		       			id		      	as   id,
+		       			parent_id	  	as   parent_id,
+		       			login_number+1  as   login_number
+		       		    from st_user where name = #name#
+       ]]>
+    </select>
+	
+	<!-- 登陆时更新用户登陆时间和次数	-->
+	<update id="updateLoginInfo" parameterClass="stUser">
+		<![CDATA[
+			UPDATE  st_user       
+			   SET  
+					login_number	 =		  #login_number#   	,
+					LASTPOSTTIME   	 =        sysdate	 
+			WHERE 	name		 	 =		  #name#
+				
+		 ]]>
+	</update>
+	
+	<!-- 列出一组记录，分页用 -->
+	<select id="findStUserForPage" parameterClass="stUser" resultClass="stUser">
+		<![CDATA[
+	      SELECT	
+			      *
+		  FROM    
+		   (
+				SELECT A.*, ROWNUM RN 
+				FROM (
+				 SELECT	
+				      ID AS id,
+				      ID_53118 AS id_53118,
+				      NAME AS name,
+				      PWD AS pwd,
+				      PARENT_ID AS parent_id,
+				      CREATDATE AS creatdate,
+				      IS_53118 AS is_53118,
+				      USERTYPE AS usertype,
+				      LASTPOSTTIME AS lastposttime,
+				      LOGIN_NUMBER AS login_number,
+				      TRUENAME AS truename,
+				      SEX AS sex,
+				      COMPANY_FULL AS company_full,
+				      COMPANY_SHORT AS company_short,
+				      PROVINCE AS province,
+				      CITY AS city,
+				      DISTRICT AS district,
+				      ADDRESS AS address,
+				      ZIPCODE AS zipcode,
+				      TEL AS tel,
+				      MOBILE AS mobile,
+				      FAX AS fax,
+				      EMAIL AS email,
+				      WEBSITE AS website,
+					  QQ AS qq
+		  FROM    ST_USER  
+		  ]]>
+				   <dynamic prepend="WHERE">
+						<isNotEmpty prepend="AND" property="id"> ID = #id# </isNotEmpty>
+						<isNotEmpty prepend="AND" property="name"> NAME = #name# </isNotEmpty>
+						<isNotEmpty prepend="AND" property="parent_id"> PARENT_ID = #parent_id# </isNotEmpty>
+					</dynamic> 
+		 <![CDATA[
+				  ) A 
+				WHERE ROWNUM <= #endRow#
+			) 
+			WHERE RN >= #startRow#
+	     ]]>
+		
+	</select>
+	<!-- 查询数量 -->
+	<select id="findStUserCount" parameterClass="stUser" resultClass="long">
+		<![CDATA[
+	       SELECT	
+			COUNT(ID)			                          			   	     		        
+	        FROM     ST_USER    
+		]]>
+		<dynamic prepend="WHERE">
+			<isNotEmpty prepend="AND" property="id"> ID = #id# </isNotEmpty>
+			<isNotEmpty prepend="AND" property="name"> NAME = #name# </isNotEmpty>
+			<isNotEmpty prepend="AND" property="parent_id"> PARENT_ID = #parent_id# </isNotEmpty>
+		</dynamic> 	
+	</select>
+	<!-- 列出一组记录，不分页用 -->
+	<select id="findStUser" parameterClass="stUser" resultClass="stUser">
+		<![CDATA[
+	      SELECT	
+			      ID AS id,
+			      ID_53118 AS id_53118,
+			      NAME AS name,
+			      PWD AS pwd,
+			      PARENT_ID AS parent_id,
+			      CREATDATE AS creatdate,
+			      IS_53118 AS is_53118,
+			      USERTYPE AS usertype,
+			      LASTPOSTTIME AS lastposttime,
+			      LOGIN_NUMBER AS login_number,
+			      TRUENAME AS truename,
+			      SEX AS sex,
+			      COMPANY_FULL AS company_full,
+			      COMPANY_SHORT AS company_short,
+			      PROVINCE AS province,
+			      CITY AS city,
+			      DISTRICT AS district,
+			      ADDRESS AS address,
+			      ZIPCODE AS zipcode,
+			      TEL AS tel,
+			      MOBILE AS mobile,
+			      FAX AS fax,
+			      EMAIL AS email,
+			      WEBSITE AS website,
+				  QQ AS qq
+		  FROM    ST_USER  
+	     ]]>
+		<dynamic prepend="WHERE">
+			<isNotEmpty prepend="AND" property="id"> ID = #id# </isNotEmpty>
+			<isNotEmpty prepend="AND" property="name"> NAME = #name# </isNotEmpty>
+			<isNotEmpty prepend="AND" property="parent_id"> PARENT_ID = #parent_id# </isNotEmpty>
+		</dynamic> 	
+	</select>
+	<!-- 添加用户信息 -->
+	<insert id="addUser" parameterClass="stUser">
+		<![CDATA[
+			INSERT INTO  ST_USER (	
+					id					    ,
+					name		  	        ,	
+					pwd		                ,
+					parent_id               ,
+					truename				,
+					sex 					,
+					company_full			,
+					company_short	  		,
+					province				,
+					city					,
+					district		      	,	
+					address					,
+					zipcode					,
+					tel						,
+					mobile			        ,	
+					fax						,
+					email					,
+					website					,
+					qq				         )  	
+					                           
+			VALUES (
+					SYS_USER.NEXTVAL		,        
+					#name#		  		    , 
+					#pwd#                   , 
+					#parent_id#             ,
+					#truename#       		,
+					#sex#          		    ,
+					#company_full#         	,
+					#company_short#	        , 
+					#province#		  		,
+					#city#			  		, 
+					#district#              , 
+					#address#	            ,
+					#zipcode#			    ,
+					#tel#			        ,
+					#mobile#			    , 
+					#fax#					,
+					#email#					,
+					#website#				,
+					#qq#
+					)  
+		 ]]>
+	</insert> 
+	<!-- 修改用户信息-->
+	<update id="updateUser" parameterClass="stUser">
+		<![CDATA[
+			UPDATE  ST_USER       
+			   SET  
+					pwd				=	#pwd#      			,
+					truename		=	#truename#         	,
+					sex				=	#sex#		  		,
+					company_full	=	#company_full# 		,
+					company_short	=	#company_short#		,
+					province		=	#province#	  		,
+					city			=	#city#				,
+					district	    =	#district#			,
+					address			=	#address#			,
+					zipcode			=	#zipcode#		    ,
+					tel				=	#tel#		        ,
+					mobile			=	#mobile#		    , 
+					fax				=	#fax#				,
+					email			=	#email#				,
+					website			=	#website#			,
+					qq				=	#qq#	
+			WHERE 	name = #name#
+				
+		 ]]>
+	</update>
+	<!-- 删除用户 -->
+	<delete id="deleteUser" parameterClass="string">
+		<![CDATA[
+			DELETE  FROM  ST_USER WHERE  ID = #id#         
+		 ]]>
+	</delete>
+</sqlMap>

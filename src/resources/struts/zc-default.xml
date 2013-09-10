@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE struts PUBLIC  "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+    <!-- 自定义父类包-->
+	<package name="zc-default" extends="struts-default,json-default">
+	 <!--
+		<interceptors>
+	    	<interceptor name="authority" class="" />
+	    	<interceptor-stack name="myDefaultStack">
+	    		<interceptor-ref name="defaultStack" />
+	    		<interceptor-ref name="authority">
+	    			<param name="includeMethods">*</param>
+	    			<param name="excludeMethods"></param>
+	    		</interceptor-ref>
+	    	</interceptor-stack>
+	    </interceptors>
+	    
+	    <default-interceptor-ref name="myDefaultStack" />
+	    -->
+	    <!-- 全局跳转  -->
+        <global-results>   
+        	 <result name="global_admin_login">/admin.jsp</result>  
+        	 <result name="global_foregroun_login">/login.jsp</result>  
+             <result name="global_admin_error">/error/exception/exception.html</result>  
+             <result name="global_foregroun_error">/error/exception/exception.html</result>  
+	    </global-results>
+	    
+    </package>
+</struts>

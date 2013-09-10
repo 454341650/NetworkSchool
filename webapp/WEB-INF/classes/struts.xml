@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<constant name="struts.objectFactory" value="spring" />
+	<constant name="struts.devMode" value="false" />
+	<constant name="struts.locale" value="zh_CN"></constant>
+	<!-- 设置能选择的上传文件大小，默认只有2MB，当选择的上传文件大于2MB时会报错 -->
+	<constant name="struts.multipart.maxSize" value="1000000000" />
+	<!-- 指定Web应用的默认编码集，相当于调用HttpServletRequest的setCharacterEncoding方法 -->
+	<constant name="struts.i18n.encoding" value="UTF-8" />
+	<!-- <controller locale="false"/> -->
+	<constant name="struts.ui.theme" value="simple" />
+	<!-- 允许访问静态方法 -->
+	<constant name="struts.ognl.allowStaticMethodAccess" value="true" />
+	<include file="resources/struts/struts_zc_default.xml"/>
+	<!-- struts通用配置 -->
+	<include file="resources/struts/*.xml" />
+	
+	
+	<constant name="struts.action.excludePattern" value="/ckfinder.*"/>
+	<!-- 文件上传临时文件夹 -->
+	<constant name="struts.multipart.saveDir" value="/tmp"/>
+</struts>

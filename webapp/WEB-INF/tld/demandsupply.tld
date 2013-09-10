@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<taglib xmlns="http://java.sun.com/xml/ns/j2ee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-jsptaglibrary_2_0.xsd"
+	version="2.0">
+
+	<description>供求信息标签</description>
+	<tlib-version>1.0</tlib-version>
+	<short-name>demandsupplyTag</short-name>
+	<uri>/demandsupplyTag</uri>
+	<tag>
+		<description>显示供求</description>
+		<name>demandsupply</name>
+		<tag-class>
+			com.zc.website.demandsupply.tag.DemandsupplyTag
+		</tag-class>
+		<body-content>JSP</body-content>
+		<attribute>
+			<name>sd_type</name>
+			<required>true</required>
+			<fragment>true</fragment>
+		</attribute>
+		<attribute>
+			<name>quantity</name>
+			<required>true</required>
+			<fragment>true</fragment>
+		</attribute>
+		<attribute>
+			<name>dateFormat</name>
+			<required>false</required>
+			<fragment>true</fragment>
+		</attribute>
+		<attribute>
+			<name>rank</name>
+			<required>false</required>
+			<fragment>true</fragment>
+		</attribute>
+		<attribute>
+			<name>clientCode</name>
+			<required>false</required>
+			<fragment>true</fragment>
+		</attribute>
+		<attribute>
+			<name>productCode</name>
+			<required>false</required>
+			<fragment>true</fragment>
+		</attribute>
+	</tag>
+</taglib>
+

@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="TsSupplyDemand">
+	<typeAlias type="com.zc.system.supply.pojo.TsSupplyDemand" alias="tsSupplyDemand"/>
+	<!--select,update,insert,delete. id名用于访问该资源，resultClass表示输出类型，parameterClass表示输入参数-->
+	
+	<!-- 增加一条记录 -->
+	<insert id="addTsSupplyDemand" parameterClass="tsSupplyDemand">
+		INSERT INTO TS_SUPPLY_DEMAND
+		<dynamic prepend="(" >
+			<isNotEmpty prepend="," property="id" > ID </isNotEmpty>
+			<isNotEmpty prepend="," property="title" > TITLE </isNotEmpty>
+			<isNotEmpty prepend="," property="id" > START_TIME </isNotEmpty>
+			<isNotEmpty prepend="," property="end_time" > END_TIME </isNotEmpty>
+			<isNotEmpty prepend="," property="client_code" > CLIENT_CODE </isNotEmpty>
+			<isNotEmpty prepend="," property="product_code" > PRODUCT_CODE </isNotEmpty>
+			<isNotEmpty prepend="," property="collect_num" > COLLECT_NUM </isNotEmpty>
+			<isNotEmpty prepend="," property="click_num" > CLICK_NUM </isNotEmpty>
+			<isNotEmpty prepend="," property="attention_num" > ATTENTION_NUM </isNotEmpty>
+			<isNotEmpty prepend="," property="supply_demand_num" > supply_demand_num </isNotEmpty>
+			<isNotEmpty prepend="," property="supply_demand_standard_num" > supply_demand_standard_num </isNotEmpty>
+			<isNotEmpty prepend="," property="sd_standard_unit_code" > sd_standard_unit_code </isNotEmpty>
+			<isNotEmpty prepend="," property="sd_unit_code" > SD_UNIT_CODE </isNotEmpty>
+			<isNotEmpty prepend="," property="unit_price" > UNIT_PRICE </isNotEmpty>
+			<isNotEmpty prepend="," property="unit_code" > UNIT_CODE </isNotEmpty>
+			<isNotEmpty prepend="," property="sd_type" > SD_TYPE </isNotEmpty>
+			<isNotEmpty prepend="," property="content" > CONTENT </isNotEmpty>
+			<isNotEmpty prepend="," property="status" > STATUS </isNotEmpty>
+			<isNotEmpty prepend="," property="pack_spec_code" > PACK_SPEC_CODE </isNotEmpty>
+			<isNotEmpty prepend="," property="remark" > REMARK </isNotEmpty>
+			<isNotEmpty prepend="," property="create_user" > CREATE_USER </isNotEmpty>
+			<isNotEmpty prepend="," property="id" > CREATE_TIME </isNotEmpty>
+		      )
+		</dynamic>
+		VALUES 
+		<dynamic prepend="(" >
+			<isNotEmpty prepend="," property="id" > #id# </isNotEmpty>
+			<isNotEmpty prepend="," property="title" > #title# </isNotEmpty>
+		    <isNotEmpty prepend="," property="id" > sysdate</isNotEmpty>
+		    <isNotEmpty prepend="," property="end_time" > #end_time# </isNotEmpty>
+			<isNotEmpty prepend="," property="client_code" > #client_code# </isNotEmpty>
+			<isNotEmpty prepend="," property="product_code" > #product_code# </isNotEmpty>
+		    <isNotEmpty prepend="," property="collect_num" > #collect_num# </isNotEmpty>
+		    <isNotEmpty prepend="," property="click_num" > #click_num# </isNotEmpty>
+		    <isNotEmpty prepend="," property="attention_num" > #attention_num# </isNotEmpty>
+		    <isNotEmpty prepend="," property="supply_demand_num" > #supply_demand_num# </isNotEmpty>
+			<isNotEmpty prepend="," property="supply_demand_standard_num" > #supply_demand_standard_num# </isNotEmpty>
+			<isNotEmpty prepend="," property="sd_standard_unit_code" > #sd_standard_unit_code# </isNotEmpty>
+			<isNotEmpty prepend="," property="sd_unit_code" > #sd_unit_code# </isNotEmpty>
+		    <isNotEmpty prepend="," property="unit_price" > #unit_price# </isNotEmpty>
+			<isNotEmpty prepend="," property="unit_code" > #unit_code# </isNotEmpty>
+		    <isNotEmpty prepend="," property="sd_type" > #sd_type# </isNotEmpty>
+			<isNotEmpty prepend="," property="content" > #content# </isNotEmpty>
+		    <isNotEmpty prepend="," property="status" > #status# </isNotEmpty>
+			<isNotEmpty prepend="," property="pack_spec_code" > #pack_spec_code# </isNotEmpty>
+			<isNotEmpty prepend="," property="remark" > #remark# </isNotEmpty>
+			<isNotEmpty prepend="," property="create_user" > #create_user# </isNotEmpty>
+		    <isNotEmpty prepend="," property="id" > now() </isNotEmpty>
+		)
+		</dynamic>
+		<!-- 
+		<selectKey resultClass="long" keyProperty="id" >  
+        	SELECT @@IDENTITY AS id   
+		</selectKey>
+		 -->
+	</insert>
+
+	<!-- 更新一条记录 -->
+	<update id="updateTsSupplyDemand" parameterClass="tsSupplyDemand">
+	  	<![CDATA[
+			UPDATE TS_SUPPLY_DEMAND
+	  	]]>
+		<dynamic prepend="SET">
+		    <isNotEmpty prepend="," property="title"> TITLE = #title# </isNotEmpty>
+		    <isNotEmpty prepend="," property="start_time"> START_TIME = #start_time# </isNotEmpty>
+		    <isNotEmpty prepend="," property="end_time"> END_TIME = #end_time# </isNotEmpty>
+		    <isNotEmpty prepend="," property="client_code"> CLIENT_CODE = #client_code# </isNotEmpty>
+		    <isNotEmpty prepend="," property="product_code"> PRODUCT_CODE = #product_code# </isNotEmpty>
+		    <isNotEmpty prepend="," property="collect_num"> COLLECT_NUM = #collect_num# </isNotEmpty>
+		    <isNotEmpty prepend="," property="click_num"> CLICK_NUM = #click_num# </isNotEmpty>
+		    <isNotEmpty prepend="," property="attention_num"> ATTENTION_NUM = #attention_num# </isNotEmpty>
+		    <isNotEmpty prepend="," property="supply_demand_num" > supply_demand_num </isNotEmpty>
+			<isNotEmpty prepend="," property="supply_demand_standard_num" > supply_demand_standard_num </isNotEmpty>
+			<isNotEmpty prepend="," property="sd_standard_unit_code" > sd_standard_unit_code </isNotEmpty>
+		    <isNotEmpty prepend="," property="sd_unit_code"> SD_UNIT_CODE = #sd_unit_code# </isNotEmpty>
+		    <isNotEmpty prepend="," property="unit_price"> UNIT_PRICE = #unit_price# </isNotEmpty>
+		    <isNotEmpty prepend="," property="unit_code"> UNIT_CODE = #unit_code# </isNotEmpty>
+		    <isNotEmpty prepend="," property="sd_type"> SD_TYPE = #sd_type# </isNotEmpty>
+		    <isNotEmpty prepend="," property="content"> CONTENT = #content# </isNotEmpty>
+		    <isNotEmpty prepend="," property="status"> STATUS = #status# </isNotEmpty>
+		    <isNotEmpty prepend="," property="pack_spec_code"> PACK_SPEC_CODE = #pack_spec_code# </isNotEmpty>
+		    <isNotEmpty prepend="," property="remark"> REMARK = #remark# </isNotEmpty>
+		    <isNotEmpty prepend="," property="update_user"> UPDATE_USER = #update_user# </isNotEmpty>
+		    <isNotEmpty prepend="," property="id"> UPDATE_TIME = now() </isNotEmpty>
+		</dynamic>
+		<dynamic prepend="WHERE">
+		      <isNotEmpty prepend="AND" property="id"> ID = #id# </isNotEmpty>
+		</dynamic>
+	</update>
+	
+  	<!-- 列出一组记录,分页用 -->
+	<select id="findTsSupplyDemandForPage" parameterClass="tsSupplyDemand" resultClass="tsSupplyDemand">
+		<![CDATA[
+	      SELECT	
+			      *
+		  FROM    
+		   (
+				SELECT A.*, ROWNUM RN 
+				FROM (SELECT T1.ID AS id,
+			      T1.TITLE AS title,
+			      T1.START_TIME AS start_time,
+			      T1.END_TIME AS end_time,
+			      T1.CLIENT_CODE AS client_code,
+			      T1.PRODUCT_CODE AS product_code,
+			      T1.COLLECT_NUM AS collect_num,
+			      T1.CLICK_NUM AS click_num,
+			      T1.ATTENTION_NUM AS attention_num,
+			      T1.supply_demand_num AS supply_demand_num,
+			      T1.supply_demand_standard_num AS supply_demand_standard_num,
+			      T1.sd_standard_unit_code as sd_standard_unit_code,
+			      T1.SD_UNIT_CODE AS sd_unit_code,
+			      T1.UNIT_PRICE AS unit_price,
+			      T1.UNIT_CODE AS unit_code,
+			      T1.SD_TYPE AS sd_type,
+			      T1.CONTENT AS content,
+			      T1.STATUS AS status,
+			      T1.PACK_SPEC_CODE AS pack_spec_code,
+			      T1.REMARK AS remark,
+			      T1.CREATE_USER AS create_user,
+			      T1.CREATE_TIME AS create_time,
+			      T1.UPDATE_USER AS update_user,
+				  T1.UPDATE_TIME AS update_time FROM TS_SUPPLY_DEMAND T1 
+		  ]]>
+				   <dynamic prepend="WHERE">
+						<isNotEmpty prepend="AND" property="id"> T1.ID = #id# </isNotEmpty>
+						<isNotEmpty prepend="AND" property="title"> T1.TITLE LIKE '%' || #title# ||'%' </isNotEmpty>
+					</dynamic>
+					<dynamic>
+						ORDER BY T1.ID ASC
+					</dynamic> 	
+		<![CDATA[
+				  ) A 
+				WHERE ROWNUM <= #endRow#
+			) 
+			WHERE RN >= #startRow#
+	     ]]>
+		
+	</select>
+	<!-- 查询数量 -->
+	<select id="findTsSupplyDemandCount" parameterClass="tsSupplyDemand" resultClass="long">
+		<![CDATA[
+	      SELECT	
+			      count(*)
+		  FROM    TS_SUPPLY_DEMAND T1 
+	     ]]>
+		 <dynamic prepend="WHERE">
+			<isNotEmpty prepend="AND" property="id"> T1.ID = #id# </isNotEmpty>
+			<isNotEmpty prepend="AND" property="title"> T1.TITLE LIKE '%' || #title# ||'%' </isNotEmpty>
+		 </dynamic>
+	</select>
+	<!-- 列出一组记录，不分页用 -->
+	<select id="findTsSupplyDemand" parameterClass="tsSupplyDemand" resultClass="tsSupplyDemand">
+		<![CDATA[
+	      SELECT	
+			      ID AS id,
+			      TITLE AS title,
+			      START_TIME AS start_time,
+			      END_TIME AS end_time,
+			      CLIENT_CODE AS client_code,
+			      PRODUCT_CODE AS product_code,
+			      COLLECT_NUM AS collect_num,
+			      CLICK_NUM AS click_num,
+			      ATTENTION_NUM AS attention_num,
+			      SUPPLY_DEMAND_NUM AS supply_demand_num,
+			      SD_UNIT_CODE AS sd_unit_code,
+			      SUPPLY_DEMAND_STANDARD_NUM AS supply_demand_standard_num,
+			      SD_STANDARD_UNIT_CODE AS sd_standard_unit_code,
+			      UNIT_PRICE AS unit_price,
+			      UNIT_CODE AS unit_code,
+			      SD_TYPE AS sd_type,
+			      CONTENT AS content,
+			      STATUS AS status,
+			      PACK_SPEC_CODE AS pack_spec_code,
+			      REMARK AS remark,
+			      CREATE_USER AS create_user,
+			      CREATE_TIME AS create_time,
+			      UPDATE_USER AS update_user,
+				  UPDATE_TIME AS update_time
+		  FROM    TS_SUPPLY_DEMAND  
+	     ]]>
+		<dynamic prepend="WHERE">
+			<isNotEmpty prepend="AND" property="id"> ID = #id# </isNotEmpty>
+			<isNotEmpty prepend="AND" property="title"> TITLE = #title# </isNotEmpty>
+		</dynamic> 	
+	</select>
+	<!-- 删除一条记录 -->
+	<delete id="delTsSupplyDemand" parameterClass="tsSupplyDemand">
+		<![CDATA[
+			DELETE  FROM   TS_SUPPLY_DEMAND            
+		 ]]>
+		 <dynamic prepend="WHERE">
+			<isNotEmpty prepend="AND" property="id"> ID = #id# </isNotEmpty>
+		</dynamic>
+	</delete>
+</sqlMap>

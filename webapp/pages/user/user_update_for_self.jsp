@@ -1,0 +1,56 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ include file="../common/header.jsp"%>
+<div id="maincontent">
+  <div id="maincontent_inner">
+   <!-- 导航菜单start -->
+     <div class="title">
+        <span class="titletxt">您现在的位置：</span>
+        <ul><li class="root">首页</li>
+        <li>用户更新</li></ul>
+     </div>
+   <!-- 导航菜单end -->
+  <div class="form"> 
+    <div class="tinput">  
+     <div class="tbody" >
+        <form action="${ctx}/user/updateUser2?" method="post" id="zcForm" encType="multipart/form-data">   
+            <table  class="tviewbodyO"  cellSpacing="1"  cellPadding="0"  width="100%"  align="center"  border="0" >
+                <tr >
+                    <td  class="tabletitleO" >用户名：</td>
+                    <td  class="tabletxtO" >
+                       <input type="text" name="name" id="name" value="${model.name}"/>
+                    </td>                                    
+                </tr>
+                <tr >
+                    <td  class="tabletitleO" >真实姓名：</td>
+                    <td  class="tabletxtO" >
+                       <input type="text" name="truename" id="truename" value="${model.truename}"/>
+                    </td>                                    
+                </tr>   
+                <tr >
+                    <td  class="tabletitleO" >性别：</td>
+                    <td  class="tabletxtO" style="">
+                    	<c:choose>
+                    		<c:when test="${model.sex=='0'}">
+                    			<input type="radio" name="sex" value="0" checked="checked"/>女&nbsp;<input type="radio" name="sex" value="1"/>男
+                    		</c:when>
+                    		<c:when test="${model.sex=='1'}">
+                    			<input type="radio" name="sex" value="0"/>女&nbsp;<input type="radio" name="sex" value="1" checked="checked"/>男
+                    		</c:when>
+                    	</c:choose>
+                    </td>                                    
+                </tr>   
+            </table>        
+            <table cellspacing=0 cellpadding=0 width="100%" align=center border=0 class="btnbar">
+               <tr>
+                 <td class="btnbarL"></td>
+                 <td class="btnbarC"><input type="submit" class="button" value="提交" ></td>
+                 <td class="btnbarR"></td>
+               </tr>
+            </table>            
+        </form>
+     </div>
+  </div>
+   </div>   
+ </div>
+</div>
+<%@ include file="../common/footer.jsp"%>

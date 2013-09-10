@@ -1,0 +1,31 @@
+/*自定义数字分页样式*/	
+.jsPage{
+    background-color:White;
+    color:Blue;
+    font-family:Consolas;
+    text-decoration:none;
+	padding:3px 5px;
+	text-align:center;
+	border:solid 1px #ddd;
+	display:inline-block;
+}
+.jsPageNo{
+    background-color:White;
+    color:gray;
+    font-family:Consolas;
+    text-decoration:none;
+	padding:3px 5px;
+	text-align:center;
+	border:solid 1px #ddd;
+	display:inline-block;
+}
+.jsPageACur {
+	background-color:#5898C4;
+	color:White;
+	font-weight:bold;
+	text-decoration:none;
+	padding:3px 5px;
+	text-align:center;
+	border:solid 1px #ddd;
+	display:inline-block;
+}
